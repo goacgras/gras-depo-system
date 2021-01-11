@@ -10,9 +10,11 @@ import PeopleIcon from '@material-ui/icons/People';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
+import './ListItems.css';
+
 export const mainListItems = (
-    <div>
-        <NavLink to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <div className="dashboard__listitems">
+        <NavLink to="/">
             <ListItem button>
                 <ListItemIcon>
                     <DashboardIcon />
@@ -21,10 +23,7 @@ export const mainListItems = (
             </ListItem>
         </NavLink>
 
-        <NavLink
-            to="/order"
-            style={{ textDecoration: 'none', color: 'inherit' }}
-        >
+        <NavLink to="/order">
             <ListItem button>
                 <ListItemIcon>
                     <ShoppingCartIcon />
@@ -33,10 +32,7 @@ export const mainListItems = (
             </ListItem>
         </NavLink>
 
-        <NavLink
-            to="/customer"
-            style={{ textDecoration: 'none', color: 'inherit' }}
-        >
+        <NavLink to="/customer">
             <ListItem button>
                 <ListItemIcon>
                     <PeopleIcon />
@@ -45,10 +41,7 @@ export const mainListItems = (
             </ListItem>
         </NavLink>
 
-        <NavLink
-            to="/product"
-            style={{ textDecoration: 'none', color: 'inherit' }}
-        >
+        <NavLink to="/product">
             <ListItem button>
                 <ListItemIcon>
                     <LocalCafeIcon />

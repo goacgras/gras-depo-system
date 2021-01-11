@@ -1,0 +1,8 @@
+.customer-page__header {
+    display: flex;
+    justify-content: space-between;
+}
+/* 
+.customer-page__header-button {
+    padding: 10px;
+} */

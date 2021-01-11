@@ -1,0 +1,4 @@
+.dashboard__listitems > a {
+    text-decoration: none;
+    color: inherit;
+}
