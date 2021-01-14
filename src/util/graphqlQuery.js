@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 export const FETCH_CUSTOMER_QUERY = gql`
     {
@@ -33,6 +33,24 @@ export const FETCH_PRODUCT_QUERY = gql`
             name
             quantity
             createdAt
+        }
+    }
+`;
+
+export const ADD_CUSTOMER_MUTATION = gql`
+    mutation($name: String!) {
+        addCustomer(name: $name) {
+            id
+            name
+            createdAt
+        }
+    }
+`;
+
+export const LOGIN_MUTATION = gql`
+    mutation($username: String!, $password: String!) {
+        login(username: $username, password: $password) {
+            token
         }
     }
 `;

@@ -1,4 +1,8 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { AuthProvider } from './context/auth';
+import { connect } from 'react-redux';
+
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Dashboard from './Components/Dashboard/Dashboard';
@@ -8,6 +12,8 @@ import Product from './Pages/Product';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 
+import * as actions from './store/actions/index';
+
 import './App.css';
 
 const theme = createMuiTheme({
@@ -16,27 +22,51 @@ const theme = createMuiTheme({
     }
 });
 
-let routes = (
-    <Switch>
-        <Route path="/" exact component={Login} />
-        <Redirect to="/" />
-    </Switch>
-);
+const App = ({ isAuthenticated, onTryAutoSignin }) => {
+    useEffect(() => {
+        onTryAutoSignin();
+    }, [onTryAutoSignin]);
 
-function App() {
-    return (
-        <BrowserRouter>
-            <ThemeProvider theme={theme}>
-                {routes}
-                {/* <Dashboard>
-                    <Route exact path="/" component={Home} />
+    let routes = (
+        <Switch>
+            <Route path="/login" exact component={Login} />
+            <Redirect to="/login" />
+        </Switch>
+    );
+    console.log('apprender');
+    if (isAuthenticated) {
+        routes = (
+            <Switch>
+                <Dashboard>
                     <Route exact path="/customer" component={Customer} />
                     <Route exact path="/order" component={Order} />
                     <Route exact path="/product" component={Product} />
-                </Dashboard> */}
-            </ThemeProvider>
-        </BrowserRouter>
-    );
-}
+                    <Route exact path="/" component={Home} />
+                    <Redirect to="/" />
+                </Dashboard>
+            </Switch>
+        );
+    }
 
-export default App;
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <ThemeProvider theme={theme}>{routes}</ThemeProvider>
+            </BrowserRouter>
+        </AuthProvider>
+    );
+};
+
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.token !== null
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onTryAutoSignin: () => dispatch(actions.tryAutoSignin())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

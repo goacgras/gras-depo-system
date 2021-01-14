@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import { FETCH_PRODUCT_QUERY } from '../util/graphqlQuery';
 

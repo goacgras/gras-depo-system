@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import { FETCH_ORDER_QUERY } from '../util/graphqlQuery';
 
@@ -18,7 +18,7 @@ const Order = () => {
                 <p>Loading</p>
             ) : (
                 <ul>
-                    {orders.data.map((order) => (
+                    {orders.data?.map((order) => (
                         <li key={order.id}>
                             <h2>Product: {order.product.name}</h2>
                             <h3>Quantity: {order.quantity}</h3>
